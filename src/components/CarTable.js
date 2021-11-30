@@ -1,0 +1,42 @@
+import { CarViewRow } from './CarViewRow';
+
+const isEmpty = arr => !Array.isArray(arr) || arr.length === 0;
+
+export const CarTable = (props) => {
+  // pass props accross 2 level of components
+  // directly call in return cause these 2 fn() is the same
+  // const onDeleteCar = (carToDelete) => {
+  //   props.onDeleteCar(carToDelete.id);
+  // };
+
+  return (
+    <table>
+        <thead>
+        {isEmpty(props.cars)
+          ? <tr><th>No Cars</th></tr>
+          :
+          <tr>
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>}
+        </thead>
+        <tbody>
+          {props.cars.map(car => 
+            <CarViewRow key={car.id} car={car} onDeleteCar={props.onDeleteCar}/>
+          )}
+          {/* key is applied in dynamic diblings */}
+        </tbody>
+      </table>
+  );
+};
+// real dom need <thead> and <tbody>, 
+// so there'll be console errors if they are not in virtual dom
+
+CarTable.defaultProps = {
+  cars: [],
+};

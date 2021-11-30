@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { render } from 'react-dom'; // named import
+// import { HelloWorld } from './components/HelloWorld';
+import { CarTool } from './components/CarTool';
+import { ColorTool } from './components/ColorTool';
+import './index.css'; // we can import css, webpack will apply it in the build process
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const colorList = [
+  { id: 1, name : 'red', hexcode: 'ff0000'},
+  { id: 2, name : 'green', hexcode: '00ff00'},
+  { id: 3, name : 'blue', hexcode: '0000ff'},
+];
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const carList = [
+  {id: 1, make: 'Tesla', model: 'X', year: '2020', color: 'black', price: '--'},
+  {id: 2, make: 'Tesla', model: 'Y', year: '2021', color: 'white', price: '--'},
+];
+
+render(
+  <>
+    {/* <HelloWorld /> */}
+    {/* React.crateElement(ColorTool, {colors: colorList}) */}
+    <ColorTool colors={colorList}/>
+    <CarTool cars={carList}/>
+  </>,
+  document.querySelector('#root'),
+)
