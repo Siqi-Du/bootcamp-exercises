@@ -30,7 +30,7 @@ export const CarTable = (props) => {
           {/* key is applied in dynamic diblings */}
           {props.cars.map(car => 
             car.id === props.editCarId
-            ? <CarEditRow key={car.id} car={car} />
+            ? <CarEditRow key={car.id} car={car} onCancelCar={props.onCancelCar} onSaveCar={props.onSaveCar} />
             : <CarViewRow key={car.id} car={car} onDeleteCar={props.onDeleteCar} onEditCar={props.onEditCar} />
           )}
         </tbody>

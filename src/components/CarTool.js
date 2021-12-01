@@ -55,22 +55,46 @@ export const CarTool = (props) => {
         id: Math.max(...cars.map(c => c.id), 0) + 1,
       }
     ]);
+
+    console.log(cars); 
+    // cars still log the original props.cars. 
+    // 1. cars array get changed(state changes in CarTool), 
+    // 2. then it re-render everything in CarTool and uner (and assign the new cars object to cars)
   };
 
   const deleteCar = carId => {
     // filter: if the element exist in the array, return true and keep this item
     // filter produce a new array
     setCars(cars.filter(car => car.id !== carId));
+    setEditCarId(-1);
   }
 
   const editCar = carId => {
     setEditCarId(carId);
   }
 
+  // implement save and cancel here, carTool has state
+  const cancelCar = carId => {
+    setEditCarId(-1);
+  };
+
+  const saveCar = car => {
+    // map is slow :iterating the array and do some operation on each element
+    // you still iterating whole array if the car is just the first item
+    
+    const newCars = [ ...cars ]; // copy the array
+    const carIndex = newCars.findIndex(c => c.id === car.id);
+    newCars[carIndex] = car;
+    setCars(newCars);
+
+    setEditCarId(-1);
+  };
+
   return (
     <>
       <ToolHeader headerText="Car Tool" />
-      <CarTable cars={cars} onDeleteCar={deleteCar} editCarId={editCarId} onEditCar={editCar} />
+      {/* prefix eventHandlers with 'on', assigned fn() not use 'on' */}
+      <CarTable cars={cars} onDeleteCar={deleteCar} editCarId={editCarId} onEditCar={editCar} onCancelCar={cancelCar} onSaveCar={saveCar} />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
       <ToolFooter />
     </>
