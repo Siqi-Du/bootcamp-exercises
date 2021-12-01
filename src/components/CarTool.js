@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useList } from '../hooks/useList';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { CarTable } from './CarTable';
@@ -32,40 +33,19 @@ export const CarTool = (props) => {
   //   price: '',
   // });
 
-  const [ cars, setCars ] = useState([...props.cars]);
+  const [ cars, appendCar, replaceCar, removeCar ] = useList([...props.cars]);
 
   // use an id to indicate which row to edit
   const [ editCarId, setEditCarId ] = useState(-1);
 
-  // const change = e => {
-  //   setCarForm({
-  //     ...carForm,
-  //     // [ e.target.name ]: e.target.type === 'number'? parseInt(e.target.value, 10) : e.target.value,
-  //      // input is always string, we can convert to int
-  //     [ e.target.name ]: e.target.value,
-  //   });
-  // };
-  // console.log(carForm);
-
+  // eventHandlers
   const addCar = (newCar) => {
-    setCars([
-      ...cars,
-      {
-        ...newCar,
-        id: Math.max(...cars.map(c => c.id), 0) + 1,
-      }
-    ]);
-
-    console.log(cars); 
-    // cars still log the original props.cars. 
-    // 1. cars array get changed(state changes in CarTool), 
-    // 2. then it re-render everything in CarTool and uner (and assign the new cars object to cars)
+    appendCar(newCar);
+    setEditCarId(-1);
   };
 
   const deleteCar = carId => {
-    // filter: if the element exist in the array, return true and keep this item
-    // filter produce a new array
-    setCars(cars.filter(car => car.id !== carId));
+    removeCar(carId);
     setEditCarId(-1);
   }
 
@@ -79,14 +59,7 @@ export const CarTool = (props) => {
   };
 
   const saveCar = car => {
-    // map is slow :iterating the array and do some operation on each element
-    // you still iterating whole array if the car is just the first item
-    
-    const newCars = [ ...cars ]; // copy the array
-    const carIndex = newCars.findIndex(c => c.id === car.id);
-    newCars[carIndex] = car;
-    setCars(newCars);
-
+    replaceCar(car); // save is a replace operation
     setEditCarId(-1);
   };
 

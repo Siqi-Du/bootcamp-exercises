@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useForm } from '../hooks/useForm';
 
 export const CarEditRow = props => {
 
   // we only put what can be changed to the state here, to let later developpers know id is not changeable
-  const [ carForm, setCarForm ] = useState({
+  const [ carForm, change ] = useForm({
     make: props.car.make,
     model: props.car.model,
     year: props.car.year,
@@ -12,13 +12,13 @@ export const CarEditRow = props => {
   });
 
   // change the car selected
-  const change = e => {
-    setCarForm({
-      ...carForm,
-      [e.target.name]: e.target.value,
-    });
-    console.log(carForm);
-  };
+  // const change = e => {
+  //   setCarForm({
+  //     ...carForm,
+  //     [e.target.name]: e.target.value,
+  //   });
+  //   console.log(carForm);
+  // };
 
   const saveCar = () => {
     const car = {

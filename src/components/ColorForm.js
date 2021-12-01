@@ -1,15 +1,19 @@
 // purpose of colorForm is to collect color data
-
-import { useState } from 'react';
+import { useForm } from '../hooks/useForm';
 
 export const ColorForm = props => {
 
-  const [colorForm, setColorForm ] = useState({
+  /* const [colorForm, setColorForm ] = useState({
+    name: '',
+    hexcode: '',
+  }); */
+  // custom hook
+  const [ colorForm, change, resetColorForm ] = useForm({
     name: '',
     hexcode: '',
   });
 
-  const change = e => {
+  /* const change = e => {
     // change the state and re-render the component
     setColorForm({
       // object spread operator(take the old colorForm and copy to the new created object)
@@ -17,15 +21,17 @@ export const ColorForm = props => {
       // computed property, use [] to indicate this is an property expression
       [ e.target.name ]: e.target.value,
     });
-  };
+  }; */
 
   // we want to pass from child component -> parent ==> callback
   const submitColor = () => {
     props.onSubmitColor({ ...colorForm });
+    
     // clear colorForm
-    setColorForm({
-      name:'', hexcode:''
-    });
+    // setColorForm({
+    //   name:'', hexcode:''
+    // });
+    resetColorForm();
   };
 
   return (

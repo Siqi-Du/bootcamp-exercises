@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useList } from '../hooks/useList';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { ColorList } from './ColorList';
@@ -53,27 +53,7 @@ export const ColorTool = (props) => {
   // colorForm has the initial value: { name: '', hexcode: ''}
   
   // mapr a copy of colors array to state
-  const [colors, setColors ] = useState([...props.colors]);
-
-  // const change = e => {
-  //   // change the state and re-render the component
-  //   setColorForm({
-  //     // object spread operator(take the old colorForm and copy to the new created object)
-  //     ...colorForm,
-  //     // computed property, use [] to indicate this is an property expression
-  //     [ e.target.name ]: e.target.value,
-  //   });
-  // };
-
-  const addColor = (newColor) => {
-    setColors([
-      ...colors,
-      {
-        ...newColor,
-        id: Math.max(...colors.map(c => c.id), 0) + 1, // 用len的话如果delete就重了
-      }
-    ]);
-  };
+  const [ colors, addColor ] = useList([...props.colors]);
 
   return (
     <>

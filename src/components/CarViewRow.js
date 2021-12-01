@@ -1,5 +1,3 @@
-import { CarEditRow } from './CarEditRow';
-
 export const CarViewRow = props => {
   // CarViewRow not have the state, it cannot change the car
   // NO: const [ car ] = useState(props.car);
