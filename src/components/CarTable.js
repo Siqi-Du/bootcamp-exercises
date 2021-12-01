@@ -6,9 +6,9 @@ const isEmpty = arr => !Array.isArray(arr) || arr.length === 0;
 export const CarTable = (props) => {
   // pass props accross 2 level of components
   // directly call in return cause these 2 fn() is the same
-  // const onDeleteCar = (carToDelete) => {
-  //   props.onDeleteCar(carToDelete.id);
-  // };
+  /* const onDeleteCar = (carToDelete) => {
+    props.onDeleteCar(carToDelete.id);
+  }; */
 
   return (
     <table>

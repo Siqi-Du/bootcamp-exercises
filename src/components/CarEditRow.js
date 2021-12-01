@@ -11,15 +11,6 @@ export const CarEditRow = props => {
     price: props.car.price,
   });
 
-  // change the car selected
-  // const change = e => {
-  //   setCarForm({
-  //     ...carForm,
-  //     [e.target.name]: e.target.value,
-  //   });
-  //   console.log(carForm);
-  // };
-
   const saveCar = () => {
     const car = {
       ...carForm,

@@ -13,24 +13,14 @@ export const ColorForm = props => {
     hexcode: '',
   });
 
-  /* const change = e => {
-    // change the state and re-render the component
-    setColorForm({
-      // object spread operator(take the old colorForm and copy to the new created object)
-      ...colorForm,
-      // computed property, use [] to indicate this is an property expression
-      [ e.target.name ]: e.target.value,
-    });
-  }; */
-
   // we want to pass from child component -> parent ==> callback
   const submitColor = () => {
     props.onSubmitColor({ ...colorForm });
     
     // clear colorForm
-    // setColorForm({
-    //   name:'', hexcode:''
-    // });
+    /* setColorForm({
+      name:'', hexcode:''
+    }); */
     resetColorForm();
   };
 

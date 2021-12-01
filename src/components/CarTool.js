@@ -7,11 +7,6 @@ import { CarForm } from './CarForm';
 
 export const CarTool = (props) => {
 
-  // const cars = [
-  //   {id: 1, make: 'Tesla', model: 'X', year: '2020', color: 'black', price: '--'},
-  //   {id: 2, make: 'Tesla', model: 'Y', year: '2021', color: 'white', price: '--'},
-  // ];
-
   // const carListItem = props.cars.map(car => {
   //   return ( // return needs () !!!
   //   // list elements 需要有key!: Each child in a list should have a unique "key" prop
@@ -24,14 +19,6 @@ export const CarTool = (props) => {
   //       <td>{car.price}</td>
   //     </tr>
   // )});
-
-  // const [ carForm, setCarForm ] = useState({
-  //   make: '',
-  //   model: '',
-  //   year: '',
-  //   color: '',
-  //   price: '',
-  // });
 
   const [ cars, appendCar, replaceCar, removeCar ] = useList([...props.cars]);
 
