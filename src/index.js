@@ -10,6 +10,7 @@ const colorList = [
   { id: 3, name : 'blue', hexcode: '0000ff'},
 ];
 
+// boolean isEditable is not good
 const carList = [
   {id: 1, make: 'Tesla', model: 'X', year: '2020', color: 'black', price: '--'},
   {id: 2, make: 'Tesla', model: 'Y', year: '2021', color: 'white', price: '--'},

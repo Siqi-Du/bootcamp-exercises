@@ -1,4 +1,5 @@
 import { CarViewRow } from './CarViewRow';
+import { CarEditRow } from './CarEditRow';
 
 const isEmpty = arr => !Array.isArray(arr) || arr.length === 0;
 
@@ -26,10 +27,12 @@ export const CarTable = (props) => {
           </tr>}
         </thead>
         <tbody>
-          {props.cars.map(car => 
-            <CarViewRow key={car.id} car={car} onDeleteCar={props.onDeleteCar}/>
-          )}
           {/* key is applied in dynamic diblings */}
+          {props.cars.map(car => 
+            car.id === props.editCarId
+            ? <CarEditRow key={car.id} car={car} />
+            : <CarViewRow key={car.id} car={car} onDeleteCar={props.onDeleteCar} onEditCar={props.onEditCar} />
+          )}
         </tbody>
       </table>
   );

@@ -34,6 +34,9 @@ export const CarTool = (props) => {
 
   const [ cars, setCars ] = useState([...props.cars]);
 
+  // use an id to indicate which row to edit
+  const [ editCarId, setEditCarId ] = useState(-1);
+
   // const change = e => {
   //   setCarForm({
   //     ...carForm,
@@ -60,10 +63,14 @@ export const CarTool = (props) => {
     setCars(cars.filter(car => car.id !== carId));
   }
 
+  const editCar = carId => {
+    setEditCarId(carId);
+  }
+
   return (
     <>
       <ToolHeader headerText="Car Tool" />
-      <CarTable cars={cars} onDeleteCar={deleteCar}/>
+      <CarTable cars={cars} onDeleteCar={deleteCar} editCarId={editCarId} onEditCar={editCar} />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
       <ToolFooter />
     </>

@@ -1,0 +1,37 @@
+import { useState } from 'react';
+
+export const CarEditRow = props => {
+
+  // we only put what can be changed to the state here, to let later developpers know id is not changeable
+  const [ carForm, setCarForm ] = useState({
+    make: props.car.make,
+    model: props.car.model,
+    year: props.car.year,
+    color: props.car.color,
+    price: props.car.price,
+  });
+
+  // change the car selected
+  const change = e => {
+    setCarForm({
+      ...carForm,
+      [e.target.name]: e.target.value,
+    });
+    console.log(carForm);
+  };
+
+  return (
+    <tr>
+      <td>{props.car.id}</td>
+      <td><input type="text" name="make" value={carForm.make} onChange={change} /></td>
+      <td><input type="text" name="model" value={carForm.model} onChange={change} /></td>
+      <td><input type="text" name="year" value={carForm.year} onChange={change} /></td>
+      <td><input type="text" name="color" value={carForm.color} onChange={change} /></td>
+      <td><input type="text" name="price" value={carForm.price} onChange={change} /></td>
+      <td>
+        <button type="button" onClick={() => null} >save</button>
+        <button type="button" onClick={() => null} >cancel</button>
+      </td>
+    </tr>
+  );
+}

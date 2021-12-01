@@ -1,3 +1,5 @@
+import { CarEditRow } from './CarEditRow';
+
 export const CarViewRow = props => {
   // CarViewRow not have the state, it cannot change the car
   // NO: const [ car ] = useState(props.car);
@@ -20,18 +22,12 @@ export const CarViewRow = props => {
         cannot write fn() code here: onClick expects a fn(), but the inline fn() will perform a delete action on render,
         we have to use a inline fn() here: onClick={() => props.onDeleteCar(props.car.id)} */}
         <button type="button" onClick={deleteCar}>Delete</button>
+        <button type="button" onClick={() => props.onEditCar(props.car.id)}>Edit</button>
       </td>
     </tr>
   );
 };
 
 CarViewRow.defaultProps = {
-  car: {
-    id: '',
-    make: '',
-    model: '',
-    year: '',
-    color: '',
-    price: '',
-  },
+  car: {},
 };
