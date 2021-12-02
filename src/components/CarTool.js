@@ -1,9 +1,9 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { CarTable } from './CarTable';
 import { CarForm } from './CarForm';
-import { useSortedList, SORT_ASC, SORT_DESC } from '../hooks/useSortedList';
+import { useCarToolStore } from '../hooks/useCarToolStore';
 
 export const CarTool = (props) => {
 
@@ -20,16 +20,17 @@ export const CarTool = (props) => {
   //     </tr>
   // )});
 
-  const [ 
-    sortedCars, appendCar, replaceCar, removeCar, 
-    sortCol, setSortCol, sortDir, setSortDir,
-  ] = useSortedList([...props.cars]);
+  // const [ 
+  //   sortedCars, appendCar, replaceCar, removeCar, 
+  //   sortCol, setSortCol, sortDir, setSortDir,
+  // ] = useSortedList([...props.cars]);
+  const store = useCarToolStore([...props.cars]);
 
   // use an id to indicate which row to edit
-  const [ editCarId, setEditCarId ] = useState(-1);
+  // const [ editCarId, setEditCarId ] = useState(-1);
 
   // eventHandlers
-  const addCar = (newCar) => {
+  /* const addCar = (newCar) => {
     appendCar(newCar);
     setEditCarId(-1);
   };
@@ -37,24 +38,24 @@ export const CarTool = (props) => {
   const deleteCar = carId => {
     removeCar(carId);
     setEditCarId(-1);
-  }
+  };
 
   const editCar = carId => {
     setEditCarId(carId);
-  }
+  }; */
 
   // implement save and cancel here, carTool has state
-  const cancelCar = carId => {
+  /* const cancelCar = carId => {
     setEditCarId(-1);
   };
 
   const saveCar = car => {
     replaceCar(car); // save is a replace operation
     setEditCarId(-1);
-  };
+  }; */
 
   // 注意sort的逻辑 每一列都是单独的sort，当按这一列sort时无需记住其他列之前的sortDir
-  const sortCars = col => {
+  /* const sortCars = col => {
     // 如果换列了，默认asc
     if(col !== sortCol){
       setSortCol(col);
@@ -62,24 +63,24 @@ export const CarTool = (props) => {
     } else {
       setSortDir(sortDir === SORT_ASC ? SORT_DESC : SORT_ASC);
     }
-  };
+  }; */
 
   return (
     <>
       <ToolHeader headerText="Car Tool" />
       {/* prefix eventHandlers with 'on', assigned fn() not use 'on' */}
       <CarTable 
-        cars={sortedCars} 
-        onDeleteCar={deleteCar} 
-        editCarId={editCarId} 
-        onEditCar={editCar} 
-        onCancelCar={cancelCar} 
-        onSaveCar={saveCar}
-        onSortCars={sortCars}
-        sortCol={sortCol}
-        sortDir={sortDir}
+        cars={store.sortedCars} 
+        onDeleteCar={store.deleteCar} 
+        editCarId={store.editCarId} 
+        onEditCar={store.editCar} 
+        onCancelCar={store.cancelCar} 
+        onSaveCar={store.saveCar}
+        onSortCars={store.sortCars}
+        sortCol={store.sortCol}
+        sortDir={store.sortDir}
       />
-      <CarForm buttonText="Add Car" onSubmitCar={addCar} />
+      <CarForm buttonText="Add Car" onSubmitCar={store.addCar} />
       <ToolFooter />
     </>
   )
