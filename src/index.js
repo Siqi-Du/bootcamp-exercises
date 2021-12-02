@@ -3,6 +3,8 @@ import { render } from 'react-dom'; // named import
 import { CarTool } from './components/CarTool';
 import { ColorTool } from './components/ColorTool';
 import './index.css'; // we can import css, webpack will apply it in the build process
+import { ColorToolStoreProvider } from './contexts/colorToolStoreContext';
+import { CarToolStoreProvider } from './contexts/carToolStoreContext';
 
 const colorList = [
   { id: 1, name : 'red', hexcode: 'ff0000'},
@@ -18,10 +20,13 @@ const carList = [
 
 render(
   <>
-    {/* <HelloWorld /> */}
-    {/* React.crateElement(ColorTool, {colors: colorList}) */}
-    <ColorTool colors={colorList}/>
-    <CarTool cars={carList}/>
+    <ColorToolStoreProvider colors={colorList}>
+      <ColorTool />
+    </ColorToolStoreProvider>
+    
+    <CarToolStoreProvider cars={carList}>
+      <CarTool />
+    </CarToolStoreProvider>
   </>,
   document.querySelector('#root'),
 )

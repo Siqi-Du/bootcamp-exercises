@@ -1,11 +1,14 @@
 // import { useState } from 'react';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
-import { CarTable } from './CarTable';
-import { CarForm } from './CarForm';
-import { useCarToolStore } from '../hooks/useCarToolStore';
+// import { CarTable } from './CarTable';
+// import { CarForm } from './CarForm';
+// import { useCarToolStore } from '../hooks/useCarToolStore';
+// import { useCarToolStoreContext } from '../contexts/carToolStoreContext';
+import { CarFormContainer } from '../containers/carFormContainer';
+import { CarTableContainer } from '../containers/carTableContainer';
 
-export const CarTool = (props) => {
+export const CarTool = () => {
 
   // const carListItem = props.cars.map(car => {
   //   return ( // return needs () !!!
@@ -20,11 +23,21 @@ export const CarTool = (props) => {
   //     </tr>
   // )});
 
-  // const [ 
-  //   sortedCars, appendCar, replaceCar, removeCar, 
-  //   sortCol, setSortCol, sortDir, setSortDir,
-  // ] = useSortedList([...props.cars]);
-  const store = useCarToolStore([...props.cars]);
+  //object destructering
+  // name need to match, its namebased. order does not matter
+  // const {
+  //   sortedCars, 
+  //   editCarId,
+  //   sortCol,
+  //   sortDir,
+  //   addCar, 
+  //   deleteCar, 
+  //   editCar,
+  //   cancelCar,
+  //   saveCar,
+  //   sortCars,
+  //  } = useCarToolStoreContext();
+  // const store = useCarToolStore([...props.cars]);
 
   // use an id to indicate which row to edit
   // const [ editCarId, setEditCarId ] = useState(-1);
@@ -68,19 +81,8 @@ export const CarTool = (props) => {
   return (
     <>
       <ToolHeader headerText="Car Tool" />
-      {/* prefix eventHandlers with 'on', assigned fn() not use 'on' */}
-      <CarTable 
-        cars={store.sortedCars} 
-        onDeleteCar={store.deleteCar} 
-        editCarId={store.editCarId} 
-        onEditCar={store.editCar} 
-        onCancelCar={store.cancelCar} 
-        onSaveCar={store.saveCar}
-        onSortCars={store.sortCars}
-        sortCol={store.sortCol}
-        sortDir={store.sortDir}
-      />
-      <CarForm buttonText="Add Car" onSubmitCar={store.addCar} />
+      <CarTableContainer />
+      <CarFormContainer />
       <ToolFooter />
     </>
   )

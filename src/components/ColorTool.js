@@ -1,10 +1,11 @@
-import { useColorToolStore } from '../hooks/useColorToolStore';
+// import { useColorToolStore } from '../hooks/useColorToolStore';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { ColorList } from './ColorList';
 import { ColorForm } from './ColorForm';
+import { useColorToolStoreContext } from '../contexts/colorToolStoreContext';
 
-export const ColorTool = (props) => {
+export const ColorTool = () => {
   
   // create an array of objects
   // object: key is always string, value can be any type
@@ -67,7 +68,7 @@ export const ColorTool = (props) => {
     }
   }; */
 
-  const store = useColorToolStore([...props.colors]);
+  const store = useColorToolStoreContext();
 
   return (
     <>
