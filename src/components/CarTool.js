@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useList } from '../hooks/useList';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { CarTable } from './CarTable';
 import { CarForm } from './CarForm';
+import { useSortedList, SORT_ASC, SORT_DESC } from '../hooks/useSordtedList';
 
 export const CarTool = (props) => {
 
@@ -20,7 +20,10 @@ export const CarTool = (props) => {
   //     </tr>
   // )});
 
-  const [ cars, appendCar, replaceCar, removeCar ] = useList([...props.cars]);
+  const [ 
+    sortedCars, appendCar, replaceCar, removeCar, 
+    sortCol, setSortCol, sortDir, setSortDir,
+  ] = useSortedList([...props.cars]);
 
   // use an id to indicate which row to edit
   const [ editCarId, setEditCarId ] = useState(-1);
@@ -50,11 +53,32 @@ export const CarTool = (props) => {
     setEditCarId(-1);
   };
 
+  // 注意sort的逻辑 每一列都是单独的sort，当按这一列sort时无需记住其他列之前的sortDir
+  const sortCars = col => {
+    // 如果换列了，默认asc
+    if(col !== sortCol){
+      setSortCol(col);
+      setSortDir(SORT_ASC);
+    } else {
+      setSortDir(sortDir === SORT_ASC ? SORT_DESC : SORT_ASC);
+    }
+  };
+
   return (
     <>
       <ToolHeader headerText="Car Tool" />
       {/* prefix eventHandlers with 'on', assigned fn() not use 'on' */}
-      <CarTable cars={cars} onDeleteCar={deleteCar} editCarId={editCarId} onEditCar={editCar} onCancelCar={cancelCar} onSaveCar={saveCar} />
+      <CarTable 
+        cars={sortedCars} 
+        onDeleteCar={deleteCar} 
+        editCarId={editCarId} 
+        onEditCar={editCar} 
+        onCancelCar={cancelCar} 
+        onSaveCar={saveCar}
+        onSortCars={sortCars}
+        sortCol={sortCol}
+        sortDir={sortDir}
+      />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
       <ToolFooter />
     </>

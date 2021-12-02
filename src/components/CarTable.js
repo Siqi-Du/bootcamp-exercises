@@ -2,13 +2,26 @@ import { CarViewRow } from './CarViewRow';
 import { CarEditRow } from './CarEditRow';
 
 const isEmpty = arr => !Array.isArray(arr) || arr.length === 0;
-
+const cols = [
+  ['Id', 'id'],
+  ['Make', 'make'],
+  ['Model', 'model'],
+  ['Year', 'year'],
+  ['Color', 'color'],
+  ['Price', 'price'],
+]
 export const CarTable = (props) => {
   // pass props accross 2 level of components
   // directly call in return cause these 2 fn() is the same
   /* const onDeleteCar = (carToDelete) => {
     props.onDeleteCar(carToDelete.id);
   }; */
+  const sortDirectionIndicator = sortCol => {
+    if (sortCol === props.sortCol){
+      return props.sortDir === 'asc' ? 'v' : '^';
+    }
+    return '';
+  }
 
   return (
     <table>
@@ -17,12 +30,13 @@ export const CarTable = (props) => {
           ? <tr><th>No Cars</th></tr>
           :
           <tr>
-            <th>Id</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Year</th>
-            <th>Color</th>
-            <th>Price</th>
+            {cols.map(([header, field]) => 
+              <th key={field}>
+                <button type="button" onClick={() => props.onSortCars(field)}>
+                  {header}{sortDirectionIndicator(field)}
+                </button>
+              </th>
+            )}
             <th>Actions</th>
           </tr>}
         </thead>

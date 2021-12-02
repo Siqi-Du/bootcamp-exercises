@@ -16,7 +16,7 @@ export const CarViewRow = props => {
       <td>{props.car.color}</td>
       <td>{props.car.price}</td>
       <td>
-        {/* onClick={props.onDeleteCar(props.car.id)} ==> NO!!!
+        {/* onClick={props.onDeleteCar(props.car.id)} ==> NO!!! calling on render
         cannot write fn() code here: onClick expects a fn(), but the inline fn() will perform a delete action on render,
         we have to use a inline fn() here: onClick={() => props.onDeleteCar(props.car.id)} */}
         <button type="button" onClick={deleteCar}>Delete</button>

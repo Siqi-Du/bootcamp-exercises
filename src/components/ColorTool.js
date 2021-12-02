@@ -1,4 +1,4 @@
-import { useList } from '../hooks/useList';
+import { useSortedList, SORT_ASC, SORT_DESC } from '../hooks/useSordtedList';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { ColorList } from './ColorList';
@@ -49,13 +49,29 @@ export const ColorTool = (props) => {
   // colorForm has the initial value: { name: '', hexcode: ''}
   
   // mapr a copy of colors array to state
-  const [ colors, addColor ] = useList([...props.colors]);
+  // use , to skip replaceColor
+  const [ 
+    sortedColors, appendColor, , deleteColor, 
+    sortCol, setSortCol, sortDir, setSortDir 
+  ] = useSortedList([...props.colors], 'id', SORT_ASC);
+
+  const sortColors = () => {
+    if(sortCol === 'name' && sortDir === SORT_DESC){
+      setSortCol('id');
+      setSortDir(SORT_ASC);
+    } else if (sortCol === 'id') {
+      setSortCol('name');
+    } else {
+      setSortDir(SORT_DESC);
+    }
+  };
 
   return (
     <>
       <ToolHeader headerText="Color Tool" />
-      <ColorList colors={colors} />
-      <ColorForm buttonText="Add Color" onSubmitColor={addColor} />
+      <button type="button" onClick={sortColors}>Sort {sortCol}:{sortDir}</button>
+      <ColorList colors={sortedColors} onDeleteColor={deleteColor} />
+      <ColorForm buttonText="Add Color" onSubmitColor={appendColor} />
       <ToolFooter />
       {/* <ToolHeader headerText={100} />  --> for propTypes */}
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 // custome hook to manage a list
 // reusable stateful logic
+// the change to state should be only in hook
 export const useList = initialItems => {
   const [ items, setItems ] = useState(initialItems);
 
@@ -33,7 +34,7 @@ export const useList = initialItems => {
   const removeItem = (itemId) => {
     // filter: if the element exist in the array, return true and keep this item
     // filter produce a new array
-    setItems(items.filter(i => i.id != itemId));
+    setItems(items.filter(i => i.id !== itemId));
   };
 
   return [ items, appendItem, replaceItem, removeItem];
