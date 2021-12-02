@@ -1,4 +1,4 @@
-import { useSortedList, SORT_ASC, SORT_DESC } from '../hooks/useSordtedList';
+import { useSortedList, SORT_ASC, SORT_DESC } from '../hooks/useSortedList';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { ColorList } from './ColorList';

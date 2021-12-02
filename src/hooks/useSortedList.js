@@ -20,6 +20,8 @@ const defaultSortItems = (unsortedItems, sortCol, sortDir) => {
   });
 };
 
+// 使在model change -> render vDOM时sort， 而不是fn() change -> model change 时sort
+// 如果在 fn() change -> model change 时sort, add a new element 不会被添加到sort的位置
 export const useSortedList = (
   initialItems, initialColumn, initialDirection, sortItems = defaultSortItems) => {
   
