@@ -3,7 +3,7 @@ import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 import { ColorList } from './ColorList';
 import { ColorForm } from './ColorForm';
-import { useColorToolStoreContext } from '../contexts/colorToolStoreContext';
+import { useColorTool } from '../hooks/useColorTool';
 
 export const ColorTool = () => {
   
@@ -49,26 +49,7 @@ export const ColorTool = () => {
   }); */
   // colorForm has the initial value: { name: '', hexcode: ''}
   
-  // mapr a copy of colors array to state
-  // use , to skip replaceColor
-  // move to colorToolStore
-  /* const [ 
-    sortedColors, addColor, , deleteColor, 
-    sortCol, setSortCol, sortDir, setSortDir 
-  ] = useSortedList([...props.colors], 'id', SORT_ASC); */
-
-  /* const sortColors = () => {
-    if(sortCol === 'name' && sortDir === SORT_DESC){
-      setSortCol('id');
-      setSortDir(SORT_ASC);
-    } else if (sortCol === 'id') {
-      setSortCol('name');
-    } else {
-      setSortDir(SORT_DESC);
-    }
-  }; */
-
-  const store = useColorToolStoreContext();
+  const store = useColorTool();
 
   return (
     <>

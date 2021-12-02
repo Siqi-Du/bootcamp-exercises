@@ -1,5 +1,5 @@
 import { render } from 'react-dom'; // named import
-// import { HelloWorld } from './components/HelloWorld';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { CarTool } from './components/CarTool';
 import { ColorTool } from './components/ColorTool';
 import './index.css'; // we can import css, webpack will apply it in the build process
@@ -19,14 +19,28 @@ const carList = [
 ];
 
 render(
-  <>
-    <ColorToolStoreProvider colors={colorList}>
-      <ColorTool />
-    </ColorToolStoreProvider>
-    
-    <CarToolStoreProvider cars={carList}>
-      <CarTool />
-    </CarToolStoreProvider>
-  </>,
+  <Router>
+    <nav>
+      <ul>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/color-tool'>Color Tool</Link></li>
+        <li><Link to='/car-tool'>Car Tool</Link></li>
+      </ul>
+    </nav>
+
+    <Route path='/' exact>
+      <h1>Home</h1>
+    </Route>
+    <Route path='/color-tool'>
+      <ColorToolStoreProvider colors={colorList}>
+        <ColorTool />
+      </ColorToolStoreProvider>
+    </Route>
+    <Route path='/car-tool'>
+      <CarToolStoreProvider cars={carList}>
+        <CarTool />
+      </CarToolStoreProvider>
+    </Route>
+  </Router>,
   document.querySelector('#root'),
 )
