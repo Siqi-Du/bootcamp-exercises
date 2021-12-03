@@ -5,7 +5,8 @@ import {
   createAddAction, 
   createSubtractAction, 
   createMultiplyAction, 
-  createDivideAction
+  createDivideAction,
+  createClearAction,
 } from '../actions/calcToolActions';
 
 export const useCalcToolStore = () => {
@@ -13,6 +14,7 @@ export const useCalcToolStore = () => {
   // subscribe to the store, and allow us to specify a fn, ???10:35am
   // hook is used inside a component or custom hook
   const result = useSelector(state => state.result);
+  const history = useSelector(state => state.history);
 
   // setup actions
   const dispatch = useDispatch(); // access dispatch method
@@ -27,10 +29,11 @@ export const useCalcToolStore = () => {
     subtract: createSubtractAction,
     multiply: createMultiplyAction,
     divide: createDivideAction,
+    clear: createClearAction,
   }, dispatch);
 
   return {
-    result,
+    result, history,
     ...boundActions,
   };
 };
