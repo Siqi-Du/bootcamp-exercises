@@ -1,6 +1,6 @@
 // import { useState } from 'react';
-import { ToolHeader } from './ToolHeader';
-import { ToolFooter } from './ToolFooter';
+// import { ToolHeader } from './ToolHeader';
+// import { ToolFooter } from './ToolFooter';
 // import { CarTable } from './CarTable';
 // import { CarForm } from './CarForm';
 // import { useCarToolStore } from '../hooks/useCarToolStore';
@@ -80,10 +80,10 @@ export const CarTool = () => {
 
   return (
     <>
-      <ToolHeader headerText="Car Tool" />
+      {/* <ToolHeader headerText="Car Tool" /> */}
       <CarTableContainer />
       <CarFormContainer />
-      <ToolFooter />
+      {/* <ToolFooter /> */}
     </>
   )
 };

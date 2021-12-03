@@ -1,6 +1,6 @@
 // import { useColorToolStore } from '../hooks/useColorToolStore';
-import { ToolHeader } from './ToolHeader';
-import { ToolFooter } from './ToolFooter';
+// import { ToolHeader } from './ToolHeader';
+// import { ToolFooter } from './ToolFooter';
 import { ColorList } from './ColorList';
 import { ColorForm } from './ColorForm';
 import { useColorTool } from '../hooks/useColorTool';
@@ -53,11 +53,11 @@ export const ColorTool = () => {
 
   return (
     <>
-      <ToolHeader headerText="Color Tool" />
+      {/* <ToolHeader headerText="Color Tool" /> */}
       <button type="button" onClick={store.sortColors}>Sort {store.sortCol}:{store.sortDir}</button>
       <ColorList colors={store.sortedColors} onDeleteColor={store.deleteColor} />
       <ColorForm buttonText="Add Color" onSubmitColor={store.addColor} />
-      <ToolFooter />
+      {/* <ToolFooter /> */}
       {/* <ToolHeader headerText={100} />  --> for propTypes */}
 
       {/* <header>

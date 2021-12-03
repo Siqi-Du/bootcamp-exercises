@@ -1,0 +1,113 @@
+/* browsers are designed with vertical scroll */
+
+.container {
+  background-color: pink;
+  
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  display: grid; 
+  /* two dementional layout */
+ 
+  /* 1fr: 1 fractional unit: give me all other space */
+   /* 每一个元素的row占多少： header nav main&aside footer*/
+  grid-template-rows: 70px 40px 1fr 40px;
+  /* main:80% sidebar:20& */
+  grid-template-columns: 4fr 1fr;
+
+  /* build a 4X2 grid */
+  /* header menu footer: take the full area; */
+  grid-template-areas:
+    'header header'
+    'menu menu'
+    'content sidebar'
+    'footer footer';
+}
+
+/* select all header elements that's a child of container */
+.container > header {
+  /* 'header' match template-area */
+  grid-area: header;
+  background-color: navy;
+
+  padding-left: 10px;
+
+  color: white;
+  /* 2 倍 of root element*/
+  font-size: 2rem; 
+
+  /* flex : display in one direction , default direction: row */
+  display: flex;
+  flex-direction: row;
+  /* major axis alignment */
+  justify-content: flex-start;
+  /* minor axis alignment */
+  align-items: center;
+}
+
+.container > nav {
+  grid-area: menu;
+  background-color: yellow;
+  padding-left: 10px;
+  display: flex;
+  aligh-item: center;
+}
+
+.menu{
+  /* no dot of list  */
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item{
+  /* top&bottom: 2px, left&right:6px */
+  padding: 2px 6px;
+  margin: 0;
+}
+
+.menu-item > a,  
+.menu-item > a:visited, 
+.menu-item > a:active, 
+.menu-item > a:hover{
+  color: black;
+}
+
+.menu-item > a,  
+.menu-item > a:visited, 
+.menu-item > a:active{
+  text-decoration: none;
+}
+
+.menu-item > a:hover{
+  text-decoration: underline;
+}
+
+.container > main {
+  grid-area: content;
+  background-color: white;
+  padding: 10px;
+}
+
+.container > aside {
+  grid-area: sidebar;
+  background-color: pink;
+  padding: 10px;
+}
+
+.container > footer {
+  grid-area: footer;
+  background-color: navy;
+
+  padding-top: 8px;
+
+  display: grid;
+  justify-content: center;
+  color: white;
+  font-size: 0.8rem;
+}
