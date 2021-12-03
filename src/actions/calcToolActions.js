@@ -3,6 +3,7 @@ export const SUBTRACT_ACTION = 'SUBTRACT';
 export const MULTIPLY_ACTION = 'MULTIPLY';
 export const DIVIDE_ACTION = 'DIVIDE';
 export const CLEAR_ACTION = 'CLEAR';
+export const DELETE_ACTION = 'DELETE';
 
 export const createAddAction = value => (
   { type: ADD_ACTION, payload: { value} }
@@ -20,6 +21,11 @@ export const createDivideAction = value => (
   { type: DIVIDE_ACTION, payload: { value } }
 );
 
+// clear action should not have any payload
 export const createClearAction = () => (
   { type: CLEAR_ACTION }
+);
+
+export const createDeleteAction = id => (
+  { type: DELETE_ACTION, payload: {id} }
 );

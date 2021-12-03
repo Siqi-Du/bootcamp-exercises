@@ -4,6 +4,7 @@ import {
   MULTIPLY_ACTION, 
   DIVIDE_ACTION,
   CLEAR_ACTION,
+  DELETE_ACTION,
  } from '../actions/calcToolActions';
 
 // reducer: s' = reducer(s,a)
@@ -23,6 +24,7 @@ export const calcToolReducer = (state = { result: 0, history: [] }, action) => {
           opName: ADD_ACTION,
           opValue: action.payload.value,
         }],
+        errorMessage: '',
       };
     case SUBTRACT_ACTION:
       return {
@@ -33,6 +35,7 @@ export const calcToolReducer = (state = { result: 0, history: [] }, action) => {
           opName: SUBTRACT_ACTION,
           opValue: action.payload.value,
         }],
+        errorMessage: '',
       };
     case MULTIPLY_ACTION:
       return {
@@ -43,8 +46,15 @@ export const calcToolReducer = (state = { result: 0, history: [] }, action) => {
           opName: MULTIPLY_ACTION,
           opValue: action.payload.value,
         }],
+        errorMessage: '',
       };
     case DIVIDE_ACTION:
+      if(action.payload.value === 0){
+        return {
+          ...state,
+          errorMessage: "should not devide by 0",
+        }
+      }
       return {
         ...state,
         result: state.result / action.payload.value,
@@ -53,6 +63,7 @@ export const calcToolReducer = (state = { result: 0, history: [] }, action) => {
           opName: DIVIDE_ACTION,
           opValue: action.payload.value,
         }],
+        errorMessage: '',
       };
     case CLEAR_ACTION:
       return {
@@ -60,8 +71,18 @@ export const calcToolReducer = (state = { result: 0, history: [] }, action) => {
         result: 0,
         history:[],
       };
+    case DELETE_ACTION:
+      return{
+        ...state,
+        history: deleteHistoryById(state.history, action.payload.id),
+      };
     default:
       return state;
   }
 
+};
+
+export const deleteHistoryById = (history, idToDelete) => {
+  const newHistory = history.filter(i => i.id !== idToDelete);
+  return newHistory;
 };

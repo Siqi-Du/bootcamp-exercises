@@ -3,7 +3,7 @@ import { useCalcToolStore } from '../hooks/useCalcToolStore';
 
 export const CalcTool = () => {
 
-  const { result, history, add, subtract, multiply, divide, clear } = useCalcToolStore();
+  const { result, history, errorMessage, add, subtract, multiply, divide, clear, deleteById } = useCalcToolStore();
 
   const [ numInput, setNumInput ] = useState(0);
 
@@ -17,7 +17,7 @@ export const CalcTool = () => {
       <section>
         Result: {result}
       </section>
-
+      <p>{errorMessage}</p>
       <form>
         <label>
           Num:
@@ -39,7 +39,10 @@ export const CalcTool = () => {
           History:
           <ul>
             {history.map(entry => 
-              <li key={entry.id}>{entry.opName} {entry.opValue}</li>
+              <li key={entry.id}>
+                {entry.opName} {entry.opValue}
+                <button type="button" onClick={() => deleteById(entry.id)}>delete</button>
+              </li>
             )}
           </ul>
         </section>
