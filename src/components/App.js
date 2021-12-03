@@ -1,8 +1,11 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Layout } from './Layout';
 import { CarTool } from './CarTool';
 import { ColorTool } from './ColorTool';
 import { ColorToolStoreProvider } from '../contexts/colorToolStoreContext';
 import { CarToolStoreProvider } from '../contexts/carToolStoreContext';
+import { ToolHeader } from './ToolHeader';
+import { ToolFooter } from './ToolFooter';
 
 const colorList = [
   { id: 1, name : 'red', hexcode: 'ff0000'},
@@ -20,27 +23,37 @@ export const App = () => {
 
   return (
     <Router>
-      <nav>
-        <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/color-tool'>Color Tool</Link></li>
-          <li><Link to='/car-tool'>Car Tool</Link></li>
-        </ul>
-      </nav>
+      <Layout>
+        <ToolHeader headerText="The Tools" />
 
-      <Route path='/' exact>
-        <h1>Home</h1>
-      </Route>
-      <Route path='/color-tool'>
-        <ColorToolStoreProvider colors={colorList}>
-          <ColorTool />
-        </ColorToolStoreProvider>
-      </Route>
-      <Route path='/car-tool'>
-        <CarToolStoreProvider cars={carList}>
-          <CarTool />
-        </CarToolStoreProvider>
-      </Route>
+        <nav>
+          <ul className="menu">
+            <li className="menu-item"><Link to='/'>Home</Link></li>
+            <li className="menu-item"><Link to='/color-tool'>Color Tool</Link></li>
+            <li className="menu-item"><Link to='/car-tool'>Car Tool</Link></li>
+          </ul>
+        </nav>
+
+        <main> 
+          <Route path='/' exact>
+            <h1>Home</h1>
+          </Route>
+          <Route path='/color-tool'>
+            <ColorToolStoreProvider colors={colorList}>
+              <ColorTool />
+            </ColorToolStoreProvider>
+          </Route>
+          <Route path='/car-tool'>
+            <CarToolStoreProvider cars={carList}>
+              <CarTool />
+            </CarToolStoreProvider>
+          </Route>
+        </main>
+
+        <aside>SideBar</aside>
+
+        <ToolFooter />
+      </Layout>
     </Router>
   );
   
