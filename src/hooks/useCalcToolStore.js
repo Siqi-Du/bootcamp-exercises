@@ -7,7 +7,7 @@ import {
   createMultiplyAction, 
   createDivideAction,
   createClearAction,
-  createDeleteAction
+  createDeleteHistoryEntryAction,
 } from '../actions/calcToolActions';
 
 export const useCalcToolStore = () => {
@@ -32,7 +32,7 @@ export const useCalcToolStore = () => {
     multiply: createMultiplyAction,
     divide: createDivideAction,
     clear: createClearAction,
-    deleteById: createDeleteAction,
+    deleteHistoryEntry: createDeleteHistoryEntryAction,
   }, dispatch);
 
   return {
