@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { Layout } from './Layout';
 import { CarTool } from './CarTool';
 import { ColorTool } from './ColorTool';
@@ -6,6 +7,7 @@ import { ColorToolStoreProvider } from '../contexts/colorToolStoreContext';
 import { CarToolStoreProvider } from '../contexts/carToolStoreContext';
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
+import { carToolStore} from '../stores/carToolStore';
 
 const colorList = [
   { id: 1, name : 'red', hexcode: 'ff0000'},
@@ -44,9 +46,13 @@ export const App = () => {
             </ColorToolStoreProvider>
           </Route>
           <Route path='/car-tool'>
-            <CarToolStoreProvider cars={carList}>
+            {/* <CarToolStoreProvider cars={carList}>
               <CarTool />
-            </CarToolStoreProvider>
+            </CarToolStoreProvider> */}
+            <Provider store={carToolStore}>
+              <CarTool />
+            </Provider>
+            
           </Route>
         </main>
 

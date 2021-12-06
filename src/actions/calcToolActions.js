@@ -6,7 +6,7 @@ export const CLEAR_ACTION = 'CLEAR';
 export const DELETE_HISTORY_ENTRY_ACTION = 'DELETE_HISTORY_ENTRY';
 
 export const createAddAction = value => (
-  { type: ADD_ACTION, payload: { value} }
+  { type: ADD_ACTION, payload: { value } }
 );
 
 export const createSubtractAction = value => (
