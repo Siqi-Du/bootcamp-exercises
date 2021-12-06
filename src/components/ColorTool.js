@@ -1,4 +1,5 @@
 // import { useColorToolStore } from '../hooks/useColorToolStore';
+import { useColorToolReduxStore } from '../hooks/useColorToolReduxStore';
 // import { ToolHeader } from './ToolHeader';
 // import { ToolFooter } from './ToolFooter';
 import { ColorList } from './ColorList';
@@ -49,11 +50,18 @@ export const ColorTool = () => {
   }); */
   // colorForm has the initial value: { name: '', hexcode: ''}
   
-  const store = useColorTool();
+  // const store = useColorTool();
+  const store = useColorToolReduxStore();
 
   return (
     <>
+    <div>
+      Sort Direction:
+      <span style={{fontWeight: store.sortDir === 'asc' ? 'bold' : 'normal'}}>ASC</span>
+      <span style={{fontWeight: store.sortDir === 'desc' ? 'bold' : 'normal'}}>DESC</span>
+    </div>
       {/* <ToolHeader headerText="Color Tool" /> */}
+
       <button type="button" onClick={store.sortColors}>Sort {store.sortCol}:{store.sortDir}</button>
       <ColorList colors={store.sortedColors} onDeleteColor={store.deleteColor} />
       <ColorForm buttonText="Add Color" onSubmitColor={store.addColor} />
