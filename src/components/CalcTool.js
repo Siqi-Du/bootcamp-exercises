@@ -1,9 +1,17 @@
 import { useState } from 'react';
+import { 
+  ADD_ACTION, 
+  SUBTRACT_ACTION, 
+  MULTIPLY_ACTION, 
+  DIVIDE_ACTION,
+  // CLEAR_ACTION,
+  // DELETE_HISTORY_ENTRY_ACTION,
+} from '../actions/calcToolActions';
 import { useCalcToolStore } from '../hooks/useCalcToolStore';
 
 export const CalcTool = () => {
 
-  const { result, history, errorMessage, 
+  const { result, history, count, errorMessage, 
     add, subtract, multiply, divide, 
     clear, deleteHistoryEntry } = useCalcToolStore();
 
@@ -46,6 +54,16 @@ export const CalcTool = () => {
                 <button type="button" onClick={() => deleteHistoryEntry(entry.id)}>X</button>
               </li>
             )}
+          </ul>
+        </section>
+        <br />
+        <section>
+          Operation count:
+          <ul>
+            <li>ADD: {count[ADD_ACTION]}</li>
+            <li>SUBTRACT: {count[SUBTRACT_ACTION]}</li>
+            <li>MULTIPLY: {count[MULTIPLY_ACTION]}</li>
+            <li>DIVIDE: {count[DIVIDE_ACTION]}</li>
           </ul>
         </section>
       </form>

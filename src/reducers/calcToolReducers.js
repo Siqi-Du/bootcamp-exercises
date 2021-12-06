@@ -12,8 +12,11 @@ import {
 
 // -----> convert our reducer to multi reducers
 
+// Duplicate state: 
+// Result and history ==> we can retrieve result from history
+
 // initialize the result on the initial load
-export const resultReducer = (/* state */ result = 0, action) => {
+/* export const resultReducer = (result = 0, action) => {
   switch (action.type) {
     case ADD_ACTION:
       return result + action.payload.value ;
@@ -31,7 +34,7 @@ export const resultReducer = (/* state */ result = 0, action) => {
     default:
       return result;
   }
-};
+}; */
 
 export const historyReducer = (/* state */ history = [], action) => {
 
@@ -67,11 +70,47 @@ export const errorMessageReducer = (/* state */ errorMessage = '', action) => {
   if(action.type === DIVIDE_ACTION && action.payload.value === 0){
     return "should not devide by 0";
   };
-  /* if( [ADD_ACTION, SUBTRACT_ACTION, MULTIPLY_ACTION, DIVIDE_ACTION].includes(action.type) ){
+  if( [ADD_ACTION, SUBTRACT_ACTION, MULTIPLY_ACTION, DIVIDE_ACTION].includes(action.type) ){
     return '';
-  }; */
+  };
   return errorMessage;
 };
+
+// count can also derived from history!!!!! ==> duplacate states!!
+/* export const countReducer = (count = {ADD:0, SUBTRACT:0, MULTIPLY:0, DIVIDE:0}, action) => {
+  switch (action.type){
+    case ADD_ACTION:
+      console.log(count.ADD_ACTION );
+      return {
+        ...count,
+        ADD: count.ADD + 1,
+      }
+    case SUBTRACT_ACTION:
+      return {
+        ...count,
+        SUBTRACT: count.SUBTRACT + 1,
+      }
+    case MULTIPLY_ACTION:
+      return {
+        ...count,
+        MULTIPLY: count.MULTIPLY + 1,
+      }
+    case DIVIDE_ACTION:
+      if(action.payload.value == 0){
+        return count;
+      }
+      return {
+        ...count,
+        DIVIDE: count.DIVIDE + 1,
+      }
+    case CLEAR_ACTION:
+      return {ADD:0, SUBTRACT:0, MULTIPLY:0, DIVIDE:0};
+    case DELETE_HISTORY_ENTRY_ACTION:
+      // how to know which op to minus 1?
+    default:
+      return count;
+  }
+}; */
 
 
 /* export const calcToolReducer = (state = {}, action) => {
@@ -83,7 +122,6 @@ export const errorMessageReducer = (/* state */ errorMessage = '', action) => {
 }; */
 
 export const calcToolReducer = combineReducers({
-  result: resultReducer,
   history: historyReducer,
   errorMessage: errorMessageReducer,
 });

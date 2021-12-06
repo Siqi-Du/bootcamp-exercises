@@ -1,13 +1,20 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
+import { ColorToolStoreProvider } from '../contexts/colorToolStoreContext';
+import { CarToolStoreProvider } from '../contexts/carToolStoreContext';
+import { carToolStore} from '../stores/carToolStore';
+import { colorToolStore} from '../stores/colorToolStore';
+import { calcToolStore } from '../stores/calcToolStore';
+
 import { Layout } from './Layout';
 import { CarTool } from './CarTool';
 import { ColorTool } from './ColorTool';
-import { ColorToolStoreProvider } from '../contexts/colorToolStoreContext';
-import { CarToolStoreProvider } from '../contexts/carToolStoreContext';
+import { CalcTool } from './CalcTool';
+
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
-import { carToolStore} from '../stores/carToolStore';
+
 
 const colorList = [
   { id: 1, name : 'red', hexcode: 'ff0000'},
@@ -33,6 +40,7 @@ export const App = () => {
             <li className="menu-item"><Link to='/'>Home</Link></li>
             <li className="menu-item"><Link to='/color-tool'>Color Tool</Link></li>
             <li className="menu-item"><Link to='/car-tool'>Car Tool</Link></li>
+            <li className="menu-item"><Link to='/calc-tool'>Calc Tool</Link></li>
           </ul>
         </nav>
 
@@ -40,19 +48,24 @@ export const App = () => {
           <Route path='/' exact>
             <h1>Home</h1>
           </Route>
+          {/* in real application, we only have 1 store per app */}
           <Route path='/color-tool'>
-            <ColorToolStoreProvider colors={colorList}>
+            <Provider store={colorToolStore}>
               <ColorTool />
-            </ColorToolStoreProvider>
+            </Provider>
           </Route>
           <Route path='/car-tool'>
             {/* <CarToolStoreProvider cars={carList}>
               <CarTool />
             </CarToolStoreProvider> */}
-            <Provider store={carToolStore}>
+            {/* <Provider store={carToolStore}>
               <CarTool />
+            </Provider> */}
+          </Route>
+          <Route path='/calc-tool'>
+            <Provider store={calcToolStore}>
+              <CalcTool />
             </Provider>
-            
           </Route>
         </main>
 

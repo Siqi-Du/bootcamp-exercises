@@ -19,7 +19,7 @@ export const carToolReducer = (/* state */ state, action) => {
           },
         ] , editCarId: -1 };
     case REMOVE_ACTION:
-      return { cars: state.cars.filter(i => i.id != action.payload.car.id), editCarId: -1 };
+      return { cars: state.cars.filter(i => i.id !== action.payload.car.id), editCarId: -1 };
     case REPLACE_ACTION:
       const copyCars = [ ...state.cars ];
       const index = copyCars.findIndex(c => c.id === action.payload.car.id)
