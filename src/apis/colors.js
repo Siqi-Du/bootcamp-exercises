@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const all = () => {
-  return fetch("http://localhost:3060/cars") // non-blocking, fetch returns a Promise
-    .then(res => res.json());
-};
+// export const all = () => {
+//   return fetch("http://localhost:3060/colors") // non-blocking, fetch returns a Promise
+//     .then(res => res.json());
+// };
 
 // mark this fn as async
 // await :wait for the Promise to be resolved ==> non-blocking
