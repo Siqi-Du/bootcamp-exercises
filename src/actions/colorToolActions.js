@@ -1,10 +1,14 @@
 // State: colors, sortCol, sortDir
 // Actions: add, delete, sort
 
-import { all } from '../apis/colors';
+import { all, append } from '../apis/colors';
 
 export const REFRESH_COLORS_REQUEST_ACTION = 'REFRESH_COLORS_REQUEST';
 export const REFRESH_COLORS_DONE_ACTION = 'REFRESH_COLORS_DONE';
+
+export const ADD_COLOR_REQUEST_ACTION = 'ADD_COLOR_REQUEST';
+export const ADD_COLOR_DONE_ACTION = 'ADD_COLOR_DONE';
+
 export const ADD_COLOR_ACTION = 'ADD_COLOR';
 export const DELETE_COLOR_ACTION = 'DELETE_COLOR';
 export const SORT_COLORS_ACTION = 'SORT_COLORS';
@@ -29,6 +33,21 @@ export const refershColors = () => {
       dispatch(createRefreshColorsDoneAction(colors));
     });
   }
+}
+
+export const createAddColorRequestAction = color => ({
+  type: ADD_COLOR_REQUEST_ACTION, payload: { color }
+});
+export const createAddColorDoneAction = color => ({
+  type: ADD_COLOR_DONE_ACTION, payload: { color }
+});
+
+export const addColor = color => {
+
+  return dispatch => {
+    dispatch(createAddColorRequestAction(color));
+    append(color).then(() => dispatch(refershColors()));
+  };
 }
 
 export const createAddColorAction = color => ({
