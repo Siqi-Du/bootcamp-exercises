@@ -1,27 +1,34 @@
-export const ADD_ACTION = 'ADD';
-export const REMOVE_ACTION = 'DELETE';
-export const REPLACE_ACTION = 'REPLACE';
-export const EDIT_ACTION = 'EDIT';
-export const CALCEL_EDIT_ACTION = 'CANCEL_EDIT';
+// state: cars, editCarId, sortCol, sortDir
+// actions: addCar(car) sortCars(col) deleteCar(id) replaceCar(car)
+export const ADD_CAR_ACTION = 'ADD_CAR';
+export const REMOVE_CAR_ACTION = 'DELETE_CAR';
+export const REPLACE_CAR_ACTION = 'REPLACE_CAR';
+export const EDIT_CAR_ACTION = 'EDIT_CAR';
+export const CANCEL_EDIT_CAR_ACTION = 'CANCEL_EDIT_CAR';
+export const SORT_CARS_ACTION = 'SORT_CARS';
 
-export const createAddCarAction = (car, editCarId) => (
-  { type: ADD_ACTION, payload: { car, editCarId }  }
+export const createAddCarAction = (car) => (
+  { type: ADD_CAR_ACTION, payload: { car }  }
 );
 
-export const createRemoveCarAction = (car, editCarId) => (
-  { type: REMOVE_ACTION, payload: { car, editCarId } }
+export const createRemoveCarAction = (carId) => (
+  { type: REMOVE_CAR_ACTION, payload: { carId } }
 );
 
-export const createReplaceCarAction = (car, editCarId) => (
-  { type: REPLACE_ACTION, payload: { car, editCarId } }
+export const createReplaceCarAction = (car) => (
+  { type: REPLACE_CAR_ACTION, payload: { car } }
 );
 
-export const createEditCarAction = (car, editCarId) => (
-  { type: EDIT_ACTION, payload: { car, editCarId } }
+export const createEditCarAction = (editCarId) => (
+  { type: EDIT_CAR_ACTION, payload: { editCarId } }
 );
 
-export const createCancelEditCarAction = (car, editCarId) => (
-  { type: CALCEL_EDIT_ACTION, payload: { car, editCarId }}
+export const createCancelEditCarAction = () => (
+  { type: CANCEL_EDIT_CAR_ACTION, payload: { editCarId: -1 }}
+);
+
+export const createSortCarAction = (col) => (
+  {type: SORT_CARS_ACTION, payload: { col }}
 );
 
 

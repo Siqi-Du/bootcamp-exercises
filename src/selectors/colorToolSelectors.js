@@ -1,5 +1,5 @@
 // move selectors out
-const defaultSortItems = (unsortedItems, sortCol, sortDir) => {
+export const defaultSortItems = (unsortedItems, sortCol, sortDir) => {
   const items = [ ...unsortedItems ];
   return items.sort((a, b) => {
 
