@@ -11,14 +11,9 @@
       "hexcode": "#00ff00"
     },
     {
-      "id": 3,
       "name": "blue",
-      "hexcode": "#0000ff"
-    },
-    {
-      "name": "qqq",
-      "hexcode": "qqq",
-      "id": 4
+      "hexcode": "",
+      "id": 3
     }
   ],
   "cars": [

@@ -1,13 +1,15 @@
 // State: colors, sortCol, sortDir
 // Actions: add, delete, sort
 
-import { all, append } from '../apis/colors';
+import { all, append, remove } from '../apis/colors';
 
 export const REFRESH_COLORS_REQUEST_ACTION = 'REFRESH_COLORS_REQUEST';
 export const REFRESH_COLORS_DONE_ACTION = 'REFRESH_COLORS_DONE';
 
 export const ADD_COLOR_REQUEST_ACTION = 'ADD_COLOR_REQUEST';
 export const ADD_COLOR_DONE_ACTION = 'ADD_COLOR_DONE';
+export const DELETE_COLOR_REQUEST_ACTION = 'DELETE_COLOR_REQUEST';
+export const DELETE_COLOR_DONE_ACTION = 'DELETE_COLOR_DONE';
 
 export const ADD_COLOR_ACTION = 'ADD_COLOR';
 export const DELETE_COLOR_ACTION = 'DELETE_COLOR';
@@ -22,7 +24,6 @@ export const createRefreshColorsDoneAction = colors => ({
   type: REFRESH_COLORS_DONE_ACTION, payload: { colors }
 });
 
-
 export const refershColors = () => {
 
   // this function is the function action object
@@ -34,6 +35,7 @@ export const refershColors = () => {
     });
   }
 }
+
 
 export const createAddColorRequestAction = color => ({
   type: ADD_COLOR_REQUEST_ACTION, payload: { color }
@@ -50,13 +52,29 @@ export const addColor = color => {
   };
 }
 
-export const createAddColorAction = color => ({
-  type: ADD_COLOR_ACTION, payload: { color }
+export const createDeleteColorRequestAction = colorId => ({
+  type: DELETE_COLOR_REQUEST_ACTION, payload: { colorId }
 });
 
-export const createDeleteColorAction = colorId => ({
-  type: DELETE_COLOR_ACTION, payload: { colorId }
+export const createDeleteColorDoneAction = colorId => ({
+  type: DELETE_COLOR_DONE_ACTION, payload: { colorId }
 });
+
+export const deleteColor = colorId => {
+  return dispatch => {
+    dispatch(createDeleteColorRequestAction(colorId));
+    remove(colorId).then(() => dispatch(refershColors()));
+  };
+};
+
+
+// export const createAddColorAction = color => ({
+//   type: ADD_COLOR_ACTION, payload: { color }
+// });
+
+// export const createDeleteColorAction = colorId => ({
+//   type: DELETE_COLOR_ACTION, payload: { colorId }
+// });
 
 // your acions don't tied with your state tree structure
 // sort don't have any params, just sort the existing colors

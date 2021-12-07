@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 
 import { 
   // ADD_COLOR_ACTION, // moved addColor fn() to actions file
-  DELETE_COLOR_ACTION,
+  // DELETE_COLOR_ACTION,
   SORT_COLORS_ACTION,
   REFRESH_COLORS_DONE_ACTION
 } from '../actions/colorToolActions';
@@ -21,10 +21,6 @@ import {
 export const colorsReducer = ( colors = [], action ) => {
   if(action.type === REFRESH_COLORS_DONE_ACTION) {
     return action.payload.colors;
-  }
-
-  if(action.type === DELETE_COLOR_ACTION) {
-    return colors.filter(i => i.id !== action.payload.colorId);
   }
 
   return colors;

@@ -48,7 +48,7 @@ export const replace = async (color) => {
   });
 };
 
-export const deleteColor = async (colorId) => {
+export const remove = async (colorId) => {
   return await fetch(`http://localhost:3060/colors/${encodeURIComponent(colorId)}`, {
     method: 'DELETE',
   });

@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import {
-  addColor,
-  // createAddColorAction,
-  createDeleteColorAction,
+  addColor, // createAddColorAction,
+  deleteColor, // createDeleteColorAction,
   createSortColorAction,
   refershColors,
 } from '../actions/colorToolActions';
@@ -26,7 +25,7 @@ export const useColorToolReduxStore = () => {
   const actions = useMemo(() => bindActionCreators({
     refershColors,
     addColor,
-    deleteColor: createDeleteColorAction,
+    deleteColor,
     sortColors: createSortColorAction,
   }, dispatch), [dispatch]); // since we use memo, actions won't change everytime
 
