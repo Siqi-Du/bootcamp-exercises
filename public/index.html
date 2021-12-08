@@ -140,41 +140,41 @@
 
       // a easier way: ===> Promise
 
-      // ---------------------######
-      // class Promise {
-      //   constructor(fn){
+      // ---------------------###### Promise fake class ----
+      /* class Promise {
+        constructor(fn){
 
-      //     this.resolveFns = [];
-      //     this.rejectFns = [];
+          this.resolveFns = [];
+          this.rejectFns = [];
 
-      //     const resolveFn = result => {
-      //       this.resolveFns.forEach(fn => fn(result));
-      //     };
+          const resolveFn = result => {
+            this.resolveFns.forEach(fn => fn(result));
+          };
 
-      //     const rejectFn = result => {
-      //       this.rejectFns.forEach(fn => fn(result));
-      //     };
+          const rejectFn = result => {
+            this.rejectFns.forEach(fn => fn(result));
+          };
 
-      //     fn(resolveFn, rejectFn);
-      //   }
+          fn(resolveFn, rejectFn);
+        }
 
-      //   then(fn) {
-      //     this.resolveFns.push(fn);
-      //   };
+        then(fn) {
+          this.resolveFns.push(fn);
+        };
 
-      //   catch(fn) {
-      //     this.rejectFns.push(fn);
-      //   };
-      // };
+        catch(fn) {
+          this.rejectFns.push(fn);
+        };
+      }; */
 
       // -----------------------
       // Promise can only resolve or reject one time
       /* const p = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({name: "a"}); 
-          // resolve: return {name:a}, as result if success; 
-          // reject, goes to catch block
-        }, 2000);
+            setTimeout(() => {
+              resolve({name: "a"}); 
+              // resolve: return {name:a}, as result if success; 
+              // reject, goes to catch block
+            }, 2000);
       });
 
       // register this cb() and continue executing
@@ -215,27 +215,26 @@
       }) */
 // ----------------------------
 
-
     </script>
     <script>
-      // Day 7 async programming
-      // const xhr = new XMLHttpRequest();
-      // console.log(xhr);
-      // xhr.addEventListener("readystatechange", () => {
-      //   console.log(xhr.readyState);
-      //   if(xhr.status === 200 && xhr.readyState === 4){
-      //     console.log("aaa");
-      //     console.log(JSON.parse(xhr.responseText));
-      //   };
-      // });
+      // Day 7  ---------  async programming -------------------
+      /* const xhr = new XMLHttpRequest();
+      console.log(xhr);
+      xhr.addEventListener("readystatechange", () => {
+        console.log(xhr.readyState);
+        if(xhr.status === 200 && xhr.readyState === 4){
+          console.log("aaa");
+          console.log(JSON.parse(xhr.responseText));
+        };
+      });
 
-      // xhr.open("GET", "http://localhost:3060/cars");
-      // xhr.send();
+      xhr.open("GET", "http://localhost:3060/cars");
+      xhr.send(); */
 
-      // Lab ex: 
+      // Lab ex: ---lab--- 
       // use code above, implement a function name 'myFetch' as described:
       // myFetch("http://localhost:3060/cars").then(cars => console.log(cars));
-      const myFetch = (uri) => {
+      /* const myFetch = (uri) => {
         return new Promise((resolve, reject) => {
 
           const xhr = new XMLHttpRequest();
@@ -251,17 +250,18 @@
           xhr.open("GET", uri);
           xhr.send();
         });
-      };
+      }; */
 
-      myFetch("http://localhost:3060/cars")
+    /*   myFetch("http://localhost:3060/cars")
         .then(cars => console.log(cars))
-        .catch(error => console.log(error))
+        .catch(error => console.log(error)) */
 
       //Lab part 2:
 
       //using 'myFetch' fn, fetch all of the colors then iterate over the colors 
       // and fetch each color individualliy
       // once all of the individually fetched colors have returned, display all of the return values
+
       // my solution
       /* myFetch("http://localhost:3060/colors")
         .then(colors => {
@@ -277,11 +277,11 @@
         }) */
 
         // answer
-        myFetch("http://localhost:3060/colors")
+        /* myFetch("http://localhost:3060/colors")
           .then(colors => {
             // fetch all colors
             // Promise.all() method takes an iterable of promises as an input, 
-            // and returns a single Promise(wait all fetch is done) that resolves to an array of the results of the input promises. 
+            // and returns a single Promise that resolves to an array of the results of the input promises. => (wait all fetch is done)
            return Promise.all(
              // iterate each color and fetch each color
               colors.map(color => {
@@ -289,7 +289,11 @@
               })
            );
           })
-          .then(colors => console.log(colors));
+          .then(colors => console.log(colors)); */
+
+          // --------------------------------------
+
+
 
         // built in fetch, returns a response object(res)
           /* fetch("http://localhost:3060/cars")
@@ -297,7 +301,7 @@
             .then(cars => console.log(cars));
 
           fetch("http://localhost:3060/cars/1")
-            .then(res => res.json()) // res convert to json(a step in our promise chain), res.json() is async[non-bloaking of main thread]
+            .then(res => res.json()) // res.json() is async[non-bloaking of main thread]
             .then(car => console.log(car));
  
           // post
@@ -345,5 +349,120 @@
           }); */
 
     </script>
+
+    <script>
+      //Declared at the beginning of a script, it has global scope (all code in the script will execute in strict mode):
+      'use strice'; 
+
+      //  ----------------------- prototype ---------
+      // you can dynamically update browser's standard lib if needed
+      /* Array.prototype.map = function(transformFn) {
+        console.log('new map func');
+        const newArr = [];
+        this.forEach(item => {
+          newArr.push(transformFn(item));
+        })
+        return newArr;
+      };
+
+      const nums = [1,2,3,4,5];
+      nums.map; */
+
+      // output: new map func
+
+
+      // -------------------------------- call-site "this"  ---------
+      // call-site "this" => 谁call了this， this 是根据调用点 ，而为每次调用建立的绑定
+
+      // I am child of my parents, and parent of my child. my role changes but I'm still myself
+      /* function doIt() {
+        console.log(this);
+      } // fn() declared in the global env
+
+      doIt(); // this: is undefined
+      window.doIt(); // value of this is now set to window
+      
+      const o = {};
+      o.doIt(); // value of this is o
+
+      console.log(o.doIt === window.doIt); //true */
+
+      //lexical this （this的作用域) ????? 4:00pm
+      // -------------------------------------
+
+     /*  const parent = {
+        name: 'parent',
+        amt: 2000,
+      };
+
+      const child = Object.create(parent);
+      child.name = 'child';
+      console.log(child.amt); // 2000
+
+      parent.amt = 4000;
+      console.log(child); // 4000
+
+      child.amt = 3000;
+      console.log(child.amt); // 3000
+      console.log(parent.amt); // 4000
+
+      delete child.amt;
+      console.log(child.amt); */
+
+      // ------------------------------------  class in js is function
+      /* const parent = { /// can be convert to a class
+        fullName() {
+          return this.firstName + " " + this.lastName;
+        }
+      };
+
+      const child1 = Object.create(parent);
+      child1.firstName = 'Bob';
+      child1.lastName = 'Smith';
+
+      const child2 = Object.create(parent);
+      child2.firstName = 'Sally';
+      child2.lastName = 'Thompkins';
+
+      console.log(child1.fullName); 
+      console.log(child2.fullName);
+      console.log(child1.fullName() === child2.fullName()) // true */
+
+      // convert to class
+      /* class Person {
+        constructor(firstName, lastName) { // class 有constructor
+          this.firstName = firstName;
+          this.lastName = lastName;
+        }
+        fullName() {
+          return this.firstName + " " + this.lastName;
+        };
+      };
+
+      const p1 = new Person("Bob", "Smith");
+      const p2 = new Person("Sally", "Thompkins");
+
+      console.log(p1.fullName());
+      console.log(p2.fullName());
+      console.log(p1.fullName === p2.fullName); // true */
+
+
+      // constructor function
+      /* function Person2(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+      }
+
+      Person2.prototype.fullName = function() {
+        return this.firstName + " " + this.lastName;
+      }
+
+      const p3 = new Person2("Bob", "Smith");
+      const p4 = new Person2("Sally", "Thompkins");
+
+      console.log(p3.fullName());
+      console.log(p4.fullName());
+      console.log(p3.fullName === p4.fullName);     // true   */
+    </script> 
   </body>
 </html>

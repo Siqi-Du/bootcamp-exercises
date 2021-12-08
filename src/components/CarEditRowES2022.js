@@ -1,29 +1,31 @@
 import { Component } from 'react';
-// ES
+// ES 2022
 // class based component is storeed on the instance itself, not on fiberNode
 export class CarEditRow extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      make: props.car.make,
-      model: props.car.model,
-      year: props.car.year,
-      color: props.car.color,
-      price: props.car.price,
-    };
-    
-    this.change = this.change.bind(this); // why bind???
-    this.saveCar = this.saveCar.bind(this);
+  // constructor(props){
+  //   super(props);
+  // class property -- ES2022
+  state = {
+    make: this.props.car.make,
+    model: this.props.car.model,
+    year: this.props.car.year,
+    color: this.props.car.color,
+    price: this.props.car.price,
   };
 
-  change(e) {
+    // class arrow function -- ES2022
+    // this.change = this.change.bind(this);
+    // this.saveCar = this.saveCar.bind(this);
+  // };
+
+  change = (e) =>{
     this.setState({
       [e.target.name]:e.target.value,
     })
   };
 
-  saveCar() {
+  saveCar = () => {
     this.props.onSaveCar({
       ...this.state,
       id: this.props.car.id,

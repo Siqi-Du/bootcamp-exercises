@@ -36,7 +36,6 @@ export const refershColors = () => {
   }
 }
 
-
 export const createAddColorRequestAction = color => ({
   type: ADD_COLOR_REQUEST_ACTION, payload: { color }
 });
