@@ -10,28 +10,30 @@ import {
   createRemoveCarAction,
 } from '../actions/carToolActions';
 
-import { defaultSortItems } from '../selectors/colorToolSelectors'
+import { sortedCarsSelector } from "../selectors/carToolSelectors";
+
 export const useCarToolReduxStore = () => {
   
-  const sortedCars = useSelector(state => {
-    return defaultSortItems(state.cars, state.carsSort.col, state.carsSort.dir);
-  });
+  const sortedCars = useSelector(sortedCarsSelector);
 
-  const { col: sortCol, dir: sortDir } = useSelector(state => { return state.carsSort });
+  const editCarId = useSelector(state => state.editCarId);
+
+  const { col: sortCol, dir: sortDir } = useSelector(state => state.carsSort);
 
   const dispatch = useDispatch();
 
   const actions = bindActionCreators({
-    appendCar: createAddCarAction,
-    removeCar: createRemoveCarAction,
-    replaceCar: createReplaceCarAction,
-    sortCats: createSortCarAction,
+    addCar: createAddCarAction,
+    deleteCar: createRemoveCarAction,
+    saveCar: createReplaceCarAction,
+    sortCars: createSortCarAction,
     editCar: createEditCarAction,
-    cancelEditCar: createCancelEditCarAction,
+    cancelCar: createCancelEditCarAction,
   }, dispatch);
 
   return {
     sortedCars,
+    editCarId,
     sortCol,
     sortDir,
     ...actions,

@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { ColorToolStoreProvider } from '../contexts/colorToolStoreContext';
-import { CarToolStoreProvider } from '../contexts/carToolStoreContext';
+// import { ColorToolStoreProvider } from '../contexts/colorToolStoreContext';
+// import { CarToolStoreProvider } from '../contexts/carToolStoreContext';
 import { carToolStore} from '../stores/carToolStore';
 import { colorToolStore} from '../stores/colorToolStore';
 import { calcToolStore } from '../stores/calcToolStore';
@@ -11,12 +11,10 @@ import { Layout } from './Layout';
 import { CarTool } from './CarTool';
 import { ColorTool } from './ColorTool';
 import { CalcTool } from './CalcTool';
-
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 
-
-const colorList = [
+/* const colorList = [
   { id: 1, name : 'red', hexcode: 'ff0000'},
   { id: 2, name : 'green', hexcode: '00ff00'},
   { id: 3, name : 'blue', hexcode: '0000ff'},
@@ -26,7 +24,7 @@ const colorList = [
 const carList = [
   {id: 1, make: 'Tesla', model: 'X', year: '2020', color: 'black', price: '--'},
   {id: 2, make: 'Tesla', model: 'Y', year: '2021', color: 'white', price: '--'},
-];
+]; */
 
 export const App = () => {
 
@@ -58,9 +56,9 @@ export const App = () => {
             {/* <CarToolStoreProvider cars={carList}>
               <CarTool />
             </CarToolStoreProvider> */}
-            {/* <Provider store={carToolStore}>
+            <Provider store={carToolStore}>
               <CarTool />
-            </Provider> */}
+            </Provider>
           </Route>
           <Route path='/calc-tool'>
             <Provider store={calcToolStore}>

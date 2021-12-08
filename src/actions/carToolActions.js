@@ -24,7 +24,7 @@ export const createEditCarAction = (editCarId) => (
 );
 
 export const createCancelEditCarAction = () => (
-  { type: CANCEL_EDIT_CAR_ACTION, payload: { editCarId: -1 }}
+  { type: CANCEL_EDIT_CAR_ACTION } // no payload
 );
 
 export const createSortCarAction = (col) => (

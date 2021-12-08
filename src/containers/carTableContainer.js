@@ -1,4 +1,6 @@
-import { useCarToolStoreContext } from '../contexts/carToolStoreContext';
+// import { useCarToolStoreContext } from '../contexts/carToolStoreContext';
+import { useCarToolReduxStore } from '../hooks/useCarToolReduxStore';
+
 import { CarTable } from '../components/CarTable';
 
 export const CarTableContainer = () => {
@@ -13,7 +15,7 @@ export const CarTableContainer = () => {
     cancelCar,
     saveCar,
     sortCars,
-   } = useCarToolStoreContext();
+   } = useCarToolReduxStore();
 
   return (
     <CarTable 
